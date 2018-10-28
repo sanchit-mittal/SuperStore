@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: blue;" stylesheets="@Buttons.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="superstore.FXML.StartupController">
+   <children>
+      <Button fx:id="endUser" layoutX="209.0" layoutY="443.0" mnemonicParsing="false" onAction="#endUserOnPress" text="Guest User" />
+      <Button fx:id="storeAdmin" layoutX="209.0" layoutY="403.0" mnemonicParsing="false" onAction="#storeAdminOnPress" text="Store Admin" />
+      <Button fx:id="warehouseAdmin" layoutX="209.0" layoutY="363.0" mnemonicParsing="false" onAction="#warehouseAdminOnPress" prefWidth="120.0" text="Warehouse Admin" />
+      <Button fx:id="superUser" layoutX="209.0" layoutY="323.0" mnemonicParsing="false" onAction="#superUserOnPress" text="Super User" AnchorPane.bottomAnchor="237.0" AnchorPane.leftAnchor="209.0" AnchorPane.rightAnchor="191.0" AnchorPane.topAnchor="323.0" />
+      <Label alignment="CENTER" layoutX="81.0" layoutY="111.0" prefHeight="53.0" prefWidth="456.0" text="SUPERSTORE MANAGEMENT SYSTEM">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="120.0" layoutY="280.0" prefHeight="40.0" prefWidth="380.0" text="Continue as :-">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="94.0" layoutY="58.0" prefHeight="53.0" prefWidth="413.0" text="WELCOME TO ">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="exit" layoutX="386.0" layoutY="546.0" mnemonicParsing="false" onAction="#exit" prefHeight="40.0" prefWidth="131.0" text="EXIT" />
+   </children>
+</AnchorPane>

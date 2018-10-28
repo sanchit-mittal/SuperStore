@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="600.0" stylesheets="@Buttons.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="superstore.FXML.WarehousePageController">
+   <children>
+      <Button fx:id="itemButton" layoutX="378.0" layoutY="215.0" mnemonicParsing="false" onAction="#itemButtonOnClick" text="Click" />
+      <Label alignment="CENTER" layoutX="212.0" layoutY="34.0" prefHeight="40.0" prefWidth="177.0" text="Welcome Warehouse Admin" />
+      <ChoiceBox fx:id="itemCB" layoutX="50.0" layoutY="222.0" prefWidth="150.0" />
+      <Label fx:id="warehouseNameLabel" alignment="CENTER" layoutX="200.0" layoutY="82.0" prefHeight="25.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

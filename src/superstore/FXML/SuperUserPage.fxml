@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="superstore.FXML.SuperUserPageController">
+   <children>
+      <Label alignment="CENTER" layoutX="162.0" layoutY="24.0" prefHeight="31.0" prefWidth="276.0" text="Welcome SuperUser" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="212.0" layoutY="173.0" mnemonicParsing="false" onAction="#addWarehouse" stylesheets="@Buttons.css" text="Add Warehouse" />
+      <Button layoutX="212.0" layoutY="213.0" mnemonicParsing="false" onAction="#addStore" stylesheets="@Buttons.css" text="Add Store" />
+      <Button layoutX="212.0" layoutY="293.0" mnemonicParsing="false" onAction="#createWarehouseAdmin" stylesheets="@Buttons.css" text="create warehouse adminstartors" />
+      <Button layoutX="212.0" layoutY="253.0" mnemonicParsing="false" onAction="#linkStoreToWarehouse" stylesheets="@Buttons.css" text="Link a store" />
+      <Button layoutX="212.0" layoutY="373.0" mnemonicParsing="false" onAction="#showStoreData" stylesheets="@Buttons.css" text="Check Store Data" />
+      <Button layoutX="212.0" layoutY="333.0" mnemonicParsing="false" onAction="#showWarehouseData" stylesheets="@Buttons.css" text="Check Warehouse Data" />
+   </children>
+</AnchorPane>
