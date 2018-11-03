@@ -95,6 +95,7 @@ public class Superstore extends Application {
         
         primaryStage.setTitle("SuperStore Management");
         primaryStage.setScene(scene);
+//        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
