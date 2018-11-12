@@ -234,6 +234,7 @@ public class AddItemPopUpController implements Initializable {
                         if(!ap2.isVisible()){
                             ap2.setVisible(true);
                             ft.play();
+                            //show older details of item
                         }
                     } else {
                         ap2.setVisible(false);
@@ -292,9 +293,14 @@ public class AddItemPopUpController implements Initializable {
         String subcategory = this.warehouse.getCategories().get(index).getSubcategories().get(index1).getName();
         
         itemTemp.setPath(category + ">" + subcategory);
-        
-        System.out.println("ITEM ADDED");
+        this.warehouse.addItem(this.warehouse.getCategories().get(index), this.warehouse.getCategories().get(index).getSubcategories().get(index1),itemTemp);
         System.out.println(itemTemp);
+        System.out.println("ITEM ADDED");
+        
+        this.printA();
+        
+        check();
+//        System.out.println(itemTemp);
         
     }
     

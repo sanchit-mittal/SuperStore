@@ -4,11 +4,13 @@
  */
 package superstore.Data;
 
+import java.io.Serializable;
+
 /**
  *
  * @author PD
  */
-public class Store_Admin {
+public class Store_Admin implements Serializable{
     
     private String loginid;
     private String password;

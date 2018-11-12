@@ -4,19 +4,22 @@
  */
 package superstore.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
  * @author PD
  */
-public class Warehouse implements Functionalities{
+public class Warehouse implements Functionalities,Serializable{
     
     private int ID;
     private String name;
     private ArrayList<Store> stores;
     private ArrayList<Item> items;
     private ArrayList<Category> categories;
+    private Warehouse_Admin admin;
 
     public Warehouse(int ID, String name) {
         this.ID = ID;
@@ -28,6 +31,29 @@ public class Warehouse implements Functionalities{
 
     public Warehouse() {
         System.out.println("LOL add code here");
+    }
+
+    public Warehouse_Admin getAdmin() {
+        return admin;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Warehouse other = (Warehouse) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return true;
     }
 
     
@@ -68,7 +94,8 @@ public class Warehouse implements Functionalities{
 
     @Override
     public void addCategory(String name) {
-       this.categories.add(new Category(name));
+       Category c = new Category(name);
+        this.categories.add(c);
     }
 
     @Override
@@ -81,6 +108,12 @@ public class Warehouse implements Functionalities{
         Item temp = new Item();
         this.items.add(temp);
         categoryName.getSubcategories().get(categoryName.getSubcategories().indexOf(subCategoryName)).getItems().add(temp);
+        System.out.println("ITEM ADDED TO > " + categoryName.getName() + " > " + subCategoryName.getName());
+    }
+    
+    public void addItem(Category categoryName,Sub_Category subCategoryName,Item temp) {
+        this.items.add(temp);
+        categoryName.getSubcategories().get( categoryName.getSubcategories().indexOf(subCategoryName) ).getItems().add(temp);
         System.out.println("ITEM ADDED TO > " + categoryName.getName() + " > " + subCategoryName.getName());
     }
 
@@ -110,8 +143,13 @@ public class Warehouse implements Functionalities{
     }
 
     @Override
-    public void deleteItem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteItem(int index,int index1,int index2,int index3) {
+        if(index2>this.items.size() || index2==-1)
+            System.out.println("ERROR CANT DELETE AND ITEM WHICH IS NOT PRESENT");
+        else{
+            this.items.remove(index2);
+            this.categories.get(index).getSubcategories().get(index1).getItems().remove(index3);
+        }
     }
 
     @Override

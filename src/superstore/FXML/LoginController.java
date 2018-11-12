@@ -74,7 +74,7 @@ public class LoginController implements Initializable {
         this.type = type;
 
         //CHEATCODE
-        this.loginDatabase.getWarehouseDatabase().put("z", new Warehouse_Admin(new Warehouse(99,"test@cheatcode"),"z"));
+        this.loginDatabase.getWarehouseDatabase().put("z", new Warehouse_Admin("z","z",new Warehouse(99,"test@cheatcode")));
         //
         
         
@@ -183,7 +183,9 @@ public class LoginController implements Initializable {
             
             switch(this.type){
                 case 1:
-                    if(userName.equals("root") && password.equals("Qazwsx12")){
+                    //if(userName.equals("root") && password.equals("Qazwsx12")){
+                    if(userName.equals("z") && password.equals("z")){
+                        
                         output = "SUPERUSER LOGIN SuccessFull";
                         try {
                             goToSuperuser();
@@ -238,6 +240,7 @@ public class LoginController implements Initializable {
         
         stage.setTitle("SuperStore Management");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
     
@@ -252,6 +255,7 @@ public class LoginController implements Initializable {
         
         stage.setTitle("SuperStore Management");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
     

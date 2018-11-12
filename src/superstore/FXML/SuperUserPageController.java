@@ -26,9 +26,9 @@ import superstore.Data.AllWarehouses;
 import superstore.Data.Category;
 import superstore.Data.Item;
 import superstore.Data.Store;
-import superstore.Data.Sub_Category;
 import superstore.Data.Superuser;
 import superstore.Data.Warehouse;
+import superstore.Data.Warehouse_Admin;
 import superstore.User_Login_Database;
 
 /**
@@ -90,10 +90,23 @@ public class SuperUserPageController implements Initializable {
     Button checkCancelWDB;
     @FXML
     Button checkCancelSDB;
+    @FXML
+    Button addWAB;
+    @FXML
+    Button cancelWAB;
+    @FXML
+    TextField loginTF;
+    @FXML
+    TextField passwordTF;
+    @FXML
+    ChoiceBox warehouseLinkCB;
+    @FXML
+    AnchorPane warehouseAdminAP;
 
     private Superuser superuser;
     private AllWarehouses warehouses;
     private AllStores stores;
+    private User_Login_Database loginDatabase;
 
     ArrayList<Integer> test;
     static int count = 1;
@@ -109,9 +122,12 @@ public class SuperUserPageController implements Initializable {
     void initialize(User_Login_Database loginDatabase, AllWarehouses warehouses, AllStores stores, Superuser superuser) {
         System.out.println("LOL in" + getClass().getName());
         test = loginDatabase.test;
+        this.loginDatabase = loginDatabase;
         this.superuser = superuser;
         this.warehouses = warehouses;
         this.stores = stores;
+        
+        
         this.warehouseAP.setVisible(false);
         this.storeAP.setVisible(false);
         this.warehouseID.setVisible(false);
@@ -122,17 +138,45 @@ public class SuperUserPageController implements Initializable {
         this.checkSDB.setVisible(false);
         this.checkCancelWDB.setVisible(false);
         this.checkCancelSDB.setVisible(false);
-        
+        this.warehouseAdminAP.setVisible(false);
+
         refresh();
 
         this.warehouseCB.getSelectionModel().selectedItemProperty().addListener((e, oldvalue, newvalue) -> {
 
             System.out.println(newvalue);
-            String temp1;
             int index = this.warehouseCB.getSelectionModel().getSelectedIndex();
             if (this.warehouseCB.getSelectionModel().getSelectedIndex() >= 0) {
                 if (index >= 0) {
-                    this.consoleTA.setText(this.warehouses.getAllwarehouses().get(index).getName());
+                    String s = "Selected Warehouse :- \nName :- " + this.warehouses.getAllwarehouses().get(index).getName() + "\nID :- "
+                            + this.warehouses.getAllwarehouses().get(index).getID();
+                    this.consoleTA.setText(s);
+                }
+            }
+        });
+
+        this.storeCB.getSelectionModel().selectedItemProperty().addListener((e, oldvalue, newvalue) -> {
+
+            System.out.println(newvalue);
+            int index = this.storeCB.getSelectionModel().getSelectedIndex();
+            if (this.storeCB.getSelectionModel().getSelectedIndex() >= 0) {
+                if (index >= 0) {
+                    String s = "Selected Store :- \nName :- " + this.stores.getAllstores().get(index).getName() + "\nID :- "
+                            + this.stores.getAllstores().get(index).getID();
+                    this.consoleTA.setText(s);
+                }
+            }
+        });
+
+        this.warehouseLinkCB.getSelectionModel().selectedItemProperty().addListener((e, oldvalue, newvalue) -> {
+
+            System.out.println(newvalue);
+            int index = this.warehouseLinkCB.getSelectionModel().getSelectedIndex();
+            if (this.warehouseLinkCB.getSelectionModel().getSelectedIndex() >= 0) {
+                if (index >= 0) {
+                    String s = "Selected Warehouse :- \nName :- " + this.warehouses.getAllwarehouses().get(index).getName() + "\nID :- "
+                            + this.warehouses.getAllwarehouses().get(index).getID();
+                    this.consoleTA.setText(s);
                 }
             }
         });
@@ -146,6 +190,24 @@ public class SuperUserPageController implements Initializable {
             temp1 = warehouses.getAllwarehouses().get(i).getName();
             System.out.println(temp1);
             this.warehouseCB.getItems().add(temp1);
+        }
+
+        this.storeCB.getItems().clear();
+        String temp2;
+        for (int i = 0; i < stores.getAllstores().size(); i++) {
+            temp2 = stores.getAllstores().get(i).getName();
+            System.out.println(temp2);
+            this.storeCB.getItems().add(temp2);
+        }
+
+        this.warehouseLinkCB.getItems().clear();
+        String temp3;
+        for (int i = 0; i < warehouses.getAllwarehouses().size(); i++) {
+            temp3 = warehouses.getAllwarehouses().get(i).getName();
+            System.out.println(temp3);
+            if (this.warehouses.getAllwarehouses().get(i).getAdmin() == null) {
+                this.warehouseLinkCB.getItems().add(temp3);
+            }
         }
 
     }
@@ -182,11 +244,6 @@ public class SuperUserPageController implements Initializable {
         System.out.println("LINKING STORE TO WAREHOUSE");
     }
 
-    public void createWarehouseAdmin() {
-        superuser.createWarehouseAdmin();
-        System.out.println("CREATING WAREHOUSE ADMIN");
-    }
-
     public void showWarehouseData() {
 
         this.checkWD.setDisable(true);
@@ -195,14 +252,13 @@ public class SuperUserPageController implements Initializable {
         //this.warehouseAddB.setVisible(true);
         this.checkCancelWDB.setVisible(true);
         this.checkWDB.setVisible(true);
-        
-        
+
         //superuser.display(new Warehouse());
         System.out.println("DISPLAYING WAREHOUSE ___  DATA");
     }
 
-    public void showWD() throws IOException{
-        
+    public void showWD() throws IOException {
+
         int index = this.warehouseCB.getSelectionModel().getSelectedIndex();
 
         if (index >= 0) {
@@ -212,21 +268,20 @@ public class SuperUserPageController implements Initializable {
             temp.setName("Test@DISPLAYDATA");
             temp.setPrice(99.52);
             temp.setQuantity(12);
-            
+
             Item temp1 = new Item();
             temp1.setName("Test@DISPLAYDATA2");
             temp1.setPrice(691.752);
             temp1.setQuantity(102);
-            
+
             this.warehouses.getAllwarehouses().get(index).addCategory("test@category1");
             Category c = this.warehouses.getAllwarehouses().get(index).getCategories().get(0);
-            
-            this.warehouses.getAllwarehouses().get(index).addSub_Category("test@subcategory1",c);
+
+            this.warehouses.getAllwarehouses().get(index).addSub_Category("test@subcategory1", c);
             this.warehouses.getAllwarehouses().get(index).addItem(this.warehouses.getAllwarehouses().get(index).getCategories().get(0), this.warehouses.getAllwarehouses().get(index).getCategories().get(0).getSubcategories().get(0), temp);
             this.warehouses.getAllwarehouses().get(index).addItem(this.warehouses.getAllwarehouses().get(index).getCategories().get(0), this.warehouses.getAllwarehouses().get(index).getCategories().get(0).getSubcategories().get(0), temp1);
             //TILL HERE
-            
-            
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("WarehouseDataDisplay.fxml"));
             Parent root = (Pane) loader.load();
             Scene scene;
@@ -240,27 +295,22 @@ public class SuperUserPageController implements Initializable {
             stage.setResizable(false);
             stage.show();
 
-            
-        
-        this.warehouseCB.setVisible(false);
-        this.warehouseID.setVisible(false);
-        //this.warehouseAddB.setVisible(false);
-        this.warehouseCancelB.setVisible(false);
-        this.checkCancelWDB.setVisible(false);
-        this.checkWDB.setVisible(false);
-            
-        this.checkWD.setDisable(false);
-        this.consoleTA.setText("");
-        }
-        
-        else{
+            this.warehouseCB.setVisible(false);
+            this.warehouseID.setVisible(false);
+            //this.warehouseAddB.setVisible(false);
+            this.warehouseCancelB.setVisible(false);
+            this.checkCancelWDB.setVisible(false);
+            this.checkWDB.setVisible(false);
+
+            this.checkWD.setDisable(false);
+            this.consoleTA.setText("");
+        } else {
             this.consoleTA.setText("SELECT A WAREHOUSE FIRST");
         }
-        
-        
+
     }
-    
-    public void showSD() throws IOException{
+
+    public void showSD() throws IOException {
         int index = this.storeCB.getSelectionModel().getSelectedIndex();
 
         if (index >= 0) {
@@ -270,21 +320,20 @@ public class SuperUserPageController implements Initializable {
             temp.setName("STest@DISPLAYDATA");
             temp.setPrice(99.52);
             temp.setQuantity(12);
-            
+
             Item temp1 = new Item();
             temp1.setName("STest@DISPLAYDATA2");
             temp1.setPrice(691.752);
             temp1.setQuantity(102);
-            
+
             this.stores.getAllstores().get(index).addCategory("test@category1");
             Category c = this.stores.getAllstores().get(index).getCategories().get(0);
-            
-            this.stores.getAllstores().get(index).addSub_Category("test@subcategory1",c);
+
+            this.stores.getAllstores().get(index).addSub_Category("test@subcategory1", c);
             this.stores.getAllstores().get(index).addItem(this.stores.getAllstores().get(index).getCategories().get(0), this.stores.getAllstores().get(index).getCategories().get(0).getSubcategories().get(0), temp);
             this.stores.getAllstores().get(index).addItem(this.stores.getAllstores().get(index).getCategories().get(0), this.stores.getAllstores().get(index).getCategories().get(0).getSubcategories().get(0), temp1);
             //TILL HERE
-            
-            
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("WarehouseDataDisplay.fxml"));
             Parent root = (Pane) loader.load();
             Scene scene;
@@ -298,27 +347,22 @@ public class SuperUserPageController implements Initializable {
             stage.setResizable(false);
             stage.show();
 
-            
-        
-        this.warehouseCB.setVisible(false);
-        this.warehouseID.setVisible(false);
-        //this.warehouseAddB.setVisible(false);
-        this.warehouseCancelB.setVisible(false);
-        this.checkCancelWDB.setVisible(false);
-        this.checkWDB.setVisible(false);
-            
-        this.checkWD.setDisable(false);
-        this.consoleTA.setText("");
-        }
-        
-        else{
+            this.warehouseCB.setVisible(false);
+            this.warehouseID.setVisible(false);
+            //this.warehouseAddB.setVisible(false);
+            this.warehouseCancelB.setVisible(false);
+            this.checkCancelWDB.setVisible(false);
+            this.checkWDB.setVisible(false);
+
+            this.checkWD.setDisable(false);
+            this.consoleTA.setText("");
+        } else {
             this.consoleTA.setText("SELECT A WAREHOUSE FIRST");
         }
-        
-        
+
     }
-    
-    public void cancelWDB(){
+
+    public void cancelWDB() {
         this.checkWD.setDisable(false);
         this.warehouseCB.setVisible(false);
         this.warehouseID.setVisible(false);
@@ -326,8 +370,8 @@ public class SuperUserPageController implements Initializable {
         this.checkCancelWDB.setVisible(false);
         this.checkWDB.setVisible(false);
     }
-    
-    public void cancelSDB(){
+
+    public void cancelSDB() {
         this.checkSD.setDisable(false);
         this.storeCB.setVisible(false);
         this.storeID.setVisible(false);
@@ -335,7 +379,7 @@ public class SuperUserPageController implements Initializable {
         this.checkCancelSDB.setVisible(false);
         this.checkSDB.setVisible(false);
     }
-    
+
     public void showStoreData() {
         this.checkSD.setDisable(true);
         this.storeCB.setVisible(true);
@@ -343,8 +387,7 @@ public class SuperUserPageController implements Initializable {
         //this.warehouseAddB.setVisible(true);
         this.checkCancelSDB.setVisible(true);
         this.checkSDB.setVisible(true);
-        
-                
+
         //superuser.display(new Store(1, "noob"));
         System.out.println("DISPLAYING STORE ____ DATA");
     }
@@ -406,6 +449,8 @@ public class SuperUserPageController implements Initializable {
 
             this.storeIDL.setText("Store ID :- ");
             this.storeNameTF.setText("");
+
+            refresh();
         } else {
 
             //in console
@@ -433,6 +478,53 @@ public class SuperUserPageController implements Initializable {
 
     public void clear() {
         this.consoleTA.setText("");
+    }
+
+    public void addWALink() {
+        String id = this.loginTF.getText().trim();
+        String pswd = this.passwordTF.getText().trim();
+
+        int index = this.warehouseLinkCB.getSelectionModel().getSelectedIndex();
+
+        if (!id.isEmpty() && !pswd.isEmpty() && pswd.length() >= 8) {
+            if (index >= 0) {
+                String s = this.warehouseLinkCB.getSelectionModel().getSelectedItem().toString();//fix this, so that we can get selected itme name and find warehouse
+                System.out.println(s);
+                this.consoleTA.setText(s);
+                Warehouse w = new Warehouse(999999, s);
+                int index2 = this.warehouses.getAllwarehouses().indexOf(w);
+                Warehouse_Admin temp = new Warehouse_Admin(id, pswd, this.warehouses.getAllwarehouses().get(index2));
+                System.out.println("inside 2 if conditions");
+                this.consoleTA.setText("inside 2 if conditions");
+                this.loginDatabase.getWarehouseDatabase().put(s, temp);
+                //TILL YESTERDAY NIGHT
+
+                System.out.println("TEST");
+                
+                this.warehouseAdminAP.setVisible(false);
+                this.createWA.setDisable(false);
+                this.loginTF.setText("");
+                this.passwordTF.setText("");
+
+            } else {
+                this.consoleTA.setText("SELECT A WAREHOUSE");
+            }
+        } else {
+            this.consoleTA.setText("Enter All The Details");
+        }
+
+    }
+
+    public void cancelWALink() {
+        this.warehouseAdminAP.setVisible(false);
+        this.createWA.setDisable(false);
+        this.loginTF.setText("");
+        this.passwordTF.setText("");
+    }
+
+    public void createWarehouseAdmin() {
+        this.warehouseAdminAP.setVisible(true);
+        this.createWA.setDisable(true);
     }
 
 }

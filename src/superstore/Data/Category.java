@@ -4,18 +4,19 @@
  */
 package superstore.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author PD
  */
-public class Category {
+public class Category implements Serializable{
     
     private String name;
     private ArrayList<Sub_Category> subcategories;
 
-    Category(String name){
+    public Category(String name){
         this.name = name;
         this.subcategories = new ArrayList<>();
     }

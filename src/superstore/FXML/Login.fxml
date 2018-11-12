@@ -33,10 +33,10 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" stylesheets="@Buttons.css" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="resetButton" alignment="CENTER" layoutX="254.0" layoutY="301.0" mnemonicParsing="false" onAction="#reset" text="Reset" />
-            <Button fx:id="loginButton" alignment="CENTER" layoutX="52.0" layoutY="301.0" mnemonicParsing="false" onAction="#validateLogin" text="Login" />
-            <PasswordField fx:id="password" alignment="CENTER" layoutX="56.0" layoutY="276.0" onKeyReleased="#check" prefHeight="25.0" prefWidth="266.0" promptText="Password" />
             <TextField fx:id="userName" alignment="CENTER" layoutX="56.0" layoutY="251.0" prefHeight="25.0" prefWidth="266.0" promptText="Username" />
+            <PasswordField fx:id="password" alignment="CENTER" layoutX="56.0" layoutY="276.0" onKeyReleased="#check" prefHeight="25.0" prefWidth="266.0" promptText="Password" />
+            <Button fx:id="loginButton" alignment="CENTER" layoutX="52.0" layoutY="301.0" mnemonicParsing="false" onAction="#validateLogin" text="Login" />
+            <Button fx:id="resetButton" alignment="CENTER" layoutX="254.0" layoutY="301.0" mnemonicParsing="false" onAction="#reset" text="Reset" />
             <Label fx:id="userType" layoutX="170.0" layoutY="105.0" prefHeight="64.0" prefWidth="275.0">
                <font>
                   <Font size="25.0" />

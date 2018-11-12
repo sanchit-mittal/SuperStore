@@ -18,7 +18,7 @@ public interface Functionalities {
     void updateItem();
     void deleteCategory();
     void deleteSub_Category();
-    void deleteItem();
+    void deleteItem(int index,int index1,int index2,int index3);
     void display();
     Item findItem();
     void sort();

@@ -124,6 +124,7 @@ public class StartupController implements Initializable {
         
         stage.setTitle("SuperStore Management");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
         
     }

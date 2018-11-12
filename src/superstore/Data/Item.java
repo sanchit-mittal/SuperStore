@@ -4,11 +4,13 @@
  */
 package superstore.Data;
 
+import java.io.Serializable;
+
 /**
  *
  * @author PD
  */
-public class Item {
+public class Item implements Serializable{
     private static int D;
     
     private String path;
@@ -19,6 +21,19 @@ public class Item {
     private int K;
     private double EOQ;
     private long UID;
+
+    @Override
+    public boolean equals(Object o) {
+        
+        return this.name.equals(((Item)o).name); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" + "path=" + path + ", name=" + name + ", price=" + price + ", quantity=" + quantity + ", H=" + H + ", K=" + K + ", EOQ=" + EOQ + ", UID=" + UID + '}';
+    }
+    
+    
     
     
     public static int getD() {

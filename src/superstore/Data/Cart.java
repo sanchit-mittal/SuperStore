@@ -4,13 +4,14 @@
  */
 package superstore.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author PD
  */
-public class Cart {
+public class Cart implements Serializable{
     
     private ArrayList<Item> items;
     private double cost;

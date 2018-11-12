@@ -64,6 +64,7 @@ public class WarehousePageController implements Initializable {
         
         stage.setTitle("SuperStore Management");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
     

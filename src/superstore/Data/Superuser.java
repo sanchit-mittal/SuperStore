@@ -4,11 +4,13 @@
  */
 package superstore.Data;
 
+import java.io.Serializable;
+
 /**
  *
  * @author PD
  */
-public class Superuser {
+public class Superuser implements Serializable {
     
    AllWarehouses warehouses;
    AllStores stores;

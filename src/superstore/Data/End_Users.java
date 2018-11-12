@@ -4,11 +4,13 @@
  */
 package superstore.Data;
 
+import java.io.Serializable;
+
 /**
  *
  * @author PD
  */
-public class End_Users {
+public class End_Users implements Serializable{
     
     private String name;
     private double balance;
