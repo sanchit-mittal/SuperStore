@@ -70,7 +70,7 @@ public class Superstore extends Application {
 //        loginDatabase.put("user", "qwerty12Q");
         //DELETE THE BELOW LINE
         this.warehouses.getAllwarehouses().add(new Warehouse(200,"test"));
-        Warehouse_Admin wa = new Warehouse_Admin(this.warehouses.getAllwarehouses().get(0),"Qazwsx12");
+        Warehouse_Admin wa = new Warehouse_Admin("root","Qazwsx12",this.warehouses.getAllwarehouses().get(0));
         wa.getWarehouse().addCategory("WarehouseAdmin@Category1");
         wa.getWarehouse().addSub_Category("WarehouseAdmin@Sub-Category1",wa.getWarehouse().getCategories().get(0));
         wa.getWarehouse().addItem(wa.getWarehouse().getCategories().get(0),wa.getWarehouse().getCategories().get(0).getSubcategories().get(0));
@@ -84,15 +84,15 @@ public class Superstore extends Application {
         loader.<StartupController>getController().initialize(loginDatabase,warehouses,stores,superuser);
         Scene scene = new Scene(root, height,width);
         
-        primaryStage.setOnCloseRequest(e -> {
-            try {
-                stop();
-            } catch (Exception ex) {
-                Logger.getLogger(Superstore.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("COULDN'T STOP AND SAVE DATA CORRECTLY");
-            }
-        });
-        
+//        primaryStage.setOnCloseRequest(e -> {
+//            try {
+//                stop();
+//            } catch (Exception ex) {
+//                Logger.getLogger(Superstore.class.getName()).log(Level.SEVERE, null, ex);
+//                System.out.println("COULDN'T STOP AND SAVE DATA CORRECTLY");
+//            }
+//        });
+//        
         primaryStage.setTitle("SuperStore Management");
         primaryStage.setScene(scene);
 //        primaryStage.setResizable(false);
