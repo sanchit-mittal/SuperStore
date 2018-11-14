@@ -6,6 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="superstore.FXML.ShowSubCategoriesController">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="superstore.FXML.ShowSubCategoriesController">
+   <children>
+      <Button fx:id="itemButton3" layoutX="504.0" layoutY="22.0" mnemonicParsing="false" onAction="#itemButtonOnClick" prefHeight="40.0" prefWidth="161.0" text="Logout" />
+   </children>
 </AnchorPane>

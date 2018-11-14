@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="superstore.FXML.AddItemPopUpController">
    <children>
-      <Label alignment="CENTER" layoutX="187.0" layoutY="55.0" prefHeight="25.0" prefWidth="231.0" text="ADD/DELETE/MODIFY AN ITEM" />
+      <Label alignment="CENTER" layoutX="187.0" layoutY="43.0" prefHeight="25.0" prefWidth="231.0" text="ADD/DELETE/MODIFY AN ITEM" />
       <AnchorPane fx:id="ap2" layoutX="6.0" layoutY="329.0" prefHeight="269.0" prefWidth="592.0" style="-fx-background-color: blue;">
          <children>
             <TextField fx:id="priceTF" layoutX="123.0" layoutY="48.0" promptText="Enter Price" />
@@ -28,5 +28,6 @@
             <ChoiceBox fx:id="categoryCB" layoutX="21.0" layoutY="88.0" prefWidth="150.0" />
          </children>
       </AnchorPane>
+      <Button fx:id="itemButton3" layoutX="496.0" layoutY="35.0" mnemonicParsing="false" onAction="#itemButtonOnClick" prefHeight="40.0" prefWidth="161.0" text="Logout" />
    </children>
 </AnchorPane>

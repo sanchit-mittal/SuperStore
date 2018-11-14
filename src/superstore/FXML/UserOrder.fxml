@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="superstore.FXML.UserOrderController">
+    <stylesheets>
+        <URL value="@Buttons.css" />
+    </stylesheets>
+   <children>
+      <Button fx:id="addItem" layoutX="315.0" layoutY="256.0" mnemonicParsing="false" onAction="#clickOnAdd" prefHeight="44.0" prefWidth="89.0" text="Cancel" />
+      <Button fx:id="addItem1" layoutX="62.0" layoutY="256.0" mnemonicParsing="false" onAction="#clickOnAdd" prefHeight="44.0" prefWidth="89.0" text="Order" />
+      <TextField fx:id="nameTF" layoutX="402.0" layoutY="185.0" onKeyReleased="#check" prefHeight="31.0" prefWidth="106.0" text="Quantity" />
+      <TextField fx:id="nameTF1" layoutX="103.0" layoutY="98.0" onKeyReleased="#check" prefHeight="31.0" prefWidth="303.0" text="Item he chose on previous screen" />
+   </children>
+</AnchorPane>
