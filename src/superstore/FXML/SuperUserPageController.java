@@ -286,7 +286,7 @@ public class SuperUserPageController implements Initializable {
             Parent root = (Pane) loader.load();
             Scene scene;
             Stage stage;
-            loader.<WarehouseDataDisplayController>getController().initialize(this.warehouses.getAllwarehouses().get(index));//FIX this using choichbox and complete it
+            loader.<WarehouseDataDisplayController>getController().initialize(this.warehouses.getAllwarehouses().get(index),1);//FIX this using choichbox and complete it
             scene = new Scene(root, 600, 600);
             stage = new Stage();
 
@@ -338,7 +338,7 @@ public class SuperUserPageController implements Initializable {
             Parent root = (Pane) loader.load();
             Scene scene;
             Stage stage;
-            loader.<WarehouseDataDisplayController>getController().initialize(this.stores.getAllstores().get(index));//FIX this using choichbox and complete it
+            loader.<WarehouseDataDisplayController>getController().initialize(this.stores.getAllstores().get(index),2);//FIX this using choichbox and complete it
             scene = new Scene(root, 600, 600);
             stage = new Stage();
 
@@ -496,7 +496,7 @@ public class SuperUserPageController implements Initializable {
                 Warehouse_Admin temp = new Warehouse_Admin(id, pswd, this.warehouses.getAllwarehouses().get(index2));
                 System.out.println("inside 2 if conditions");
                 this.consoleTA.setText("inside 2 if conditions");
-                this.loginDatabase.getWarehouseDatabase().put(s, temp);
+                this.loginDatabase.getWarehouseDatabase().put(id, temp);//changed here
                 //TILL YESTERDAY NIGHT
 
                 System.out.println("TEST");

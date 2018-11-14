@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -26,10 +27,16 @@ public class WarehouseDataDisplayController implements Initializable {
 
     @FXML
     TableView dataTV;
+    @FXML
+    Button sortB;
     
     private Warehouse warehouse;
     private Store store;
     private int type; //1-WAREHOUSE , 2-STORE
+    private int sortPriceType=1;//1-asc , 2-desc
+    
+    TableColumn<Item,Double> priceColumn = new TableColumn<>("Price");
+        
     
     /**
      * Initializes the controller class.
@@ -39,16 +46,23 @@ public class WarehouseDataDisplayController implements Initializable {
         // TODO
     }  
     
-    public void initialize(Warehouse warehouse) {
+    public void initialize(Warehouse warehouse,int type) {
         this.warehouse = warehouse;
+        this.type = type;
         //STORE IS NULL
-        setup();        
+        priceColumn.sortTypeProperty().setValue(TableColumn.SortType.ASCENDING);
+        setup();
+        
+        
     }  
     
-    public void initialize(Store store) {
+    public void initialize(Store store,int type) {
         this.store = store;
+        this.type = type;
         //WAREHOUSE IS NULL
         setup();        
+        
+        priceColumn.sortTypeProperty().setValue(TableColumn.SortType.ASCENDING);
     }  
     
     public void setup(){
@@ -60,18 +74,19 @@ public class WarehouseDataDisplayController implements Initializable {
         quantityColumn.setMinWidth(80);
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
                 
-        TableColumn<Item,Double> priceColumn = new TableColumn<>("Price");
         priceColumn.setMinWidth(100);
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         //
         if(type == 1)
             dataTV.setItems(getItems());
-        else if(type == 1)
+        else if(type == 2)
             dataTV.setItems(getItems2());
         else{
             System.out.println("WOW, CHECK HERE");
         }
         dataTV.getColumns().addAll(nameColumn,quantityColumn,priceColumn);
+        priceColumn.setSortType(TableColumn.SortType.ASCENDING);//check sorting stuff
+        dataTV.getSortOrder().setAll(priceColumn,quantityColumn);
         
     } 
     
@@ -79,6 +94,7 @@ public class WarehouseDataDisplayController implements Initializable {
         ObservableList<Item>  items = FXCollections.observableArrayList();
         for (int i = 0; i < warehouse.getItems().size(); i++) {
             items.add(warehouse.getItems().get(i));
+            System.out.println(warehouse.getItems().get(i).getName());
         }
         
         return items;
@@ -91,6 +107,28 @@ public class WarehouseDataDisplayController implements Initializable {
         }
         
         return items;
+    }
+    
+    public void sort(){
+//        dataTV.sort
+        System.out.println("WTH - " + priceColumn.getSortType().name());
+//        dataTV.setSortType;
+        if(this.sortPriceType == 1 ){
+            System.out.println("before - ascending\nNow - descending");
+            priceColumn.sortTypeProperty().setValue(TableColumn.SortType.DESCENDING);
+            this.sortPriceType = 2;
+            this.sortB.setText("Price - Sort Ascending");
+        
+        }
+        else if(this.sortPriceType == 2 ){
+            System.out.println("before - descending\nNow - ascending");
+            priceColumn.sortTypeProperty().setValue(TableColumn.SortType.ASCENDING);
+            this.sortPriceType = 1;
+            this.sortB.setText("Price - Sort Descending");
+        }
+        dataTV.sort();
+        
+        System.out.println("sorting\n\n");
     }
     
 }

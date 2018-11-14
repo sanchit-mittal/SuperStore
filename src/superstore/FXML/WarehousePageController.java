@@ -31,7 +31,7 @@ public class WarehousePageController implements Initializable {
     Button itemButton;
     
     @FXML
-    ChoiceBox itemCB;
+    ChoiceBox otherwarehouse;
     
     @FXML
     Label warehouseNameLabel;
@@ -48,17 +48,54 @@ public class WarehousePageController implements Initializable {
     public void initialize(Warehouse warehouse) {
         this.warehouse = warehouse;
         this.warehouseNameLabel.setText("Warehouse Name :- " + this.warehouse.getName());
-        for (int i = 0; i < warehouse.getItems().size(); i++) {
-            this.itemCB.getItems().add(warehouse.getItems().get(i).getName());
-        }
-        this.itemCB.getItems().add("LOL");
+        
+        
+        
     }    
     
     public void itemButtonOnClick() throws IOException{
         System.out.println("item button clicked");
-        FXMLLoader loader1 = new FXMLLoader(getClass().getResource("AddItemPopUp.fxml"));
+        nextScreen(1);
+        
+    }
+    
+    public void itemButtonOnClick1() throws IOException{
+        System.out.println("item button1 clicked");
+        nextScreen(2);
+    }
+    public void itemButtonOnClick2() throws IOException{
+        System.out.println("item button2 clicked");
+        nextScreen(3);
+    }
+ 
+    public void nextScreen(int n) throws IOException{//n--> 1-item  2-subcategory  3-category
+        String s="";
+        switch(n){
+            case 1:
+                s = "AddItemPopUp.fxml";
+                break;
+            case 2:
+                s = "AddSubCategoryPopUp.fxml";
+                break;
+//            case 3:
+//                s = "AddCategoryPopUp.fxml";
+//                break;
+        }
+        System.out.println("S:- " + s);
+        FXMLLoader loader1 = new FXMLLoader(getClass().getResource(s));
         Parent root = (Pane)loader1.load();
-        loader1.<AddItemPopUpController>getController().initialize(warehouse);
+        switch(n){
+            case 1:
+                loader1.<AddItemPopUpController>getController().initialize(warehouse);
+                break;
+            case 2:
+                loader1.<AddSubCategoryPopUpController>getController().initialize(warehouse);
+                break;
+//            case 3:
+//                loader1.<AddCategoryPopUpController>getController().initialize(warehouse);
+//                break;
+        }
+//        loader1.<AddItemPopUpController>getController().initialize(warehouse);
         Scene scene = new Scene(root, 600,600);
         Stage stage = new Stage();
         
@@ -67,5 +104,4 @@ public class WarehousePageController implements Initializable {
         stage.setResizable(false);
         stage.show();
     }
-    
 }

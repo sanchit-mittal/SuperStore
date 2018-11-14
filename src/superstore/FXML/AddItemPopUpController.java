@@ -17,7 +17,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-import superstore.Data.Category;
 import superstore.Data.Item;
 import superstore.Data.Warehouse;
 
@@ -54,8 +53,8 @@ public class AddItemPopUpController implements Initializable {
     Button deleteItem;
     @FXML
     Button updateItem;
-    
-    Warehouse warehouse;
+    @FXML    
+    private Warehouse warehouse;
 //    ArrayList<Item> items;
     
     private int currentChoice = 1000; //0-add 1-delete 2-modify
@@ -77,19 +76,19 @@ public class AddItemPopUpController implements Initializable {
         
         //CHEAT
         
-        this.warehouse.addCategory("test@category1");
-        this.warehouse.addCategory("test@category2");
-        this.warehouse.addCategory("test@category3");
-           
-        Category c = this.warehouse.getCategories().get(0);
-        this.warehouse.addSub_Category("test@subcategory1",c);
-        this.warehouse.addSub_Category("test@subcategory2",c);
-        this.warehouse.addSub_Category("test@subcategory3",c);
-        
-        this.warehouse.addItem(this.warehouse.getCategories().get(0) , this.warehouse.getCategories().get(0).getSubcategories().get(0));
-        this.warehouse.getItems().get(0).setName("Test@Item1");
-        this.warehouse.addItem(this.warehouse.getCategories().get(0) , this.warehouse.getCategories().get(0).getSubcategories().get(0));
-        this.warehouse.getItems().get(1).setName("Test@Item2");
+//        this.warehouse.addCategory("test@category1");
+//        this.warehouse.addCategory("test@category2");
+//        this.warehouse.addCategory("test@category3");
+//           
+//        Category c = this.warehouse.getCategories().get(0);
+//        this.warehouse.addSub_Category("test@subcategory1",c);
+//        this.warehouse.addSub_Category("test@subcategory2",c);
+//        this.warehouse.addSub_Category("test@subcategory3",c);
+//        
+//        this.warehouse.addItem(this.warehouse.getCategories().get(0) , this.warehouse.getCategories().get(0).getSubcategories().get(0));
+//        this.warehouse.getItems().get(0).setName("Test@Item1");
+//        this.warehouse.addItem(this.warehouse.getCategories().get(0) , this.warehouse.getCategories().get(0).getSubcategories().get(0));
+//        this.warehouse.getItems().get(1).setName("Test@Item2");
         //
         
         
@@ -197,7 +196,7 @@ public class AddItemPopUpController implements Initializable {
         
        
     }
-
+ 
 
     public void check() {
         FadeTransition ft = new FadeTransition(Duration.millis(1000), ap2);
@@ -289,14 +288,18 @@ public class AddItemPopUpController implements Initializable {
         int index = this.categoryCB.getSelectionModel().getSelectedIndex();
         int index1 = this.subcategoryCB.getSelectionModel().getSelectedIndex();
         
-        String category = this.warehouse.getCategories().get(index).getName();
-        String subcategory = this.warehouse.getCategories().get(index).getSubcategories().get(index1).getName();
-        
-        itemTemp.setPath(category + ">" + subcategory);
-        this.warehouse.addItem(this.warehouse.getCategories().get(index), this.warehouse.getCategories().get(index).getSubcategories().get(index1),itemTemp);
-        System.out.println(itemTemp);
-        System.out.println("ITEM ADDED");
-        
+        if(index>=0 && index1>=0){
+            String category = this.warehouse.getCategories().get(index).getName();
+            String subcategory = this.warehouse.getCategories().get(index).getSubcategories().get(index1).getName();
+
+            itemTemp.setPath(category + ">" + subcategory);
+            this.warehouse.addItem(this.warehouse.getCategories().get(index), this.warehouse.getCategories().get(index).getSubcategories().get(index1),itemTemp);
+            System.out.println(itemTemp);
+            System.out.println("ITEM ADDED");
+        }
+        else{
+            System.out.println("EITHER CATEGORY OR SUBCATEGORY ISNT CHOOSEN");
+        }
         this.printA();
         
         check();
