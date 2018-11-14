@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="superstore.FXML.DeleteController">
+    <stylesheets>
+        <URL value="@Buttons.css" />
+    </stylesheets>
+   <children>
+      <Button fx:id="itemButton3" layoutX="514.0" layoutY="34.0" mnemonicParsing="false" onAction="#itemButtonOnClick" prefHeight="40.0" prefWidth="161.0" text="Logout" />
+      <Button fx:id="addcommon" layoutX="442.0" layoutY="280.0" mnemonicParsing="false" onAction="#add1" prefHeight="25.0" prefWidth="80.0" text="Delete" />
+      <Label layoutX="199.0" layoutY="44.0" text="Delete Category/Sub-Category/Item">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="subCB" layoutX="237.0" layoutY="208.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="catCB" layoutX="235.0" layoutY="155.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="mainCB" layoutX="235.0" layoutY="105.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
